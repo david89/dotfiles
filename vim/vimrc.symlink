@@ -1,0 +1,114 @@
+set nocompatible
+
+"======================="
+" Vundle configuration. "
+"======================="
+
+" From https://github.com/VundleVim/Vundle.vim
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+
+if isdirectory(expand('$HOME/.vim/bundle/Vundle.vim'))
+  call vundle#begin()
+  Plugin 'VundleVim/Vundle.vim'
+
+  "================="
+  " Vundle plugins. "
+  "================="
+
+  " Snippet collection.
+  Plugin 'honza/vim-snippets'
+
+  " Comment functions.
+  Plugin 'scrooloose/nerdcommenter'
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+  " Align line-wise comment delimiters flush left instead of following code
+  " indentation.
+  let g:NERDDefaultAlign = 'left'
+  " Remap <leader>cc to toggle instead of comment.
+  " autocmd VimEnter is used to ensure that we are doing the mapping after
+  " loading the plugins.
+  autocmd VimEnter * nnoremap <leader>cc :call NERDComment(0,"toggle")<CR>
+  autocmd VimEnter * vnoremap <leader>cc :call NERDComment(0,"toggle")<CR>
+
+  " Snippets' repo.
+  Plugin 'SirVer/ultisnips'
+  " Remap UltiSnips' trigger keys.
+  let g:UltiSnipsExpandTrigger = "<c-j>"
+  let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+
+  " Temporary.
+  " Dark color scheme.
+  Plugin 'danilo-augusto/vim-afterglow'
+
+  " Enhanced C++ highlighting.
+  Plugin 'octol/vim-cpp-enhanced-highlight'
+
+  " Autocompletion.
+  " TODO: instructions on how to install it.
+  Plugin 'Valloric/YouCompleteMe'
+
+  " Color scheme for vim status bar.
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+
+  call vundle#end()
+else
+  echomsg 'Vundle is not installed. You can install Vundle from'
+    \ 'https://github.com/VundleVim/Vundle.vim'
+endif
+
+" Enable afterglow color scheme.
+colorscheme afterglow
+
+"====================="
+" Some basic options. "
+"====================="
+
+filetype plugin indent on
+
+" 2 spaces instead of tabs.
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Enable syntax highlighting.
+syntax on
+
+" Show line numbers.
+set number
+
+" Disable search highlighting.
+set nohlsearch
+
+" Ctrl+t to open a new tab.
+map <C-t> <ESC>:tabnew<CR>
+
+" Close autocomplete window after completion.
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" Automatically change the working path to the path of the current file.
+" autocmd BufNewFile,BufEnter * silent! lcd %:p:h
+
+" Clang format.
+" TODO: add instructions on how to install clang-format.
+"       * We have to run brew install llvm
+"       * Follow brew instructions on how to add llvm to PATH.
+"       * Run clang-format -style=llvm -dump-config > .clang-format and modify
+"         the defaults.
+" Normal mode.
+map <C-f> :pyf ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
+" Insert mode.
+" imap <C-f> <c-o>:pyf ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
+
+" Clang include fixer.
+" TODO: Doesn't work yet.
+" Normal mode.
+" nnoremap <leader>clf :let g:clang_include_fixer_query_mode=0<cr>:pyf ~/homebrew/opt/llvm/share/clang/clang-include-fixer.py<cr>
+" Query word in the cursor.
+"nnoremap <leader>clq :let g:clang_include_fixer_query_mode=1<cr>:pyf ~/homebrew/opt/llvm/share/clang/clang-include-fixer.py<cr>
+" 
+" Clang rename.
+noremap <leader>cr :pyf ~/homebrew/opt/llvm/share/clang/clang-rename.py<cr>
