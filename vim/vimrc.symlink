@@ -88,6 +88,7 @@ map <C-t> <ESC>:tabnew<CR>
 
 " Close autocomplete window after completion.
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 
 " Automatically change the working path to the path of the current file.
 " autocmd BufNewFile,BufEnter * silent! lcd %:p:h
