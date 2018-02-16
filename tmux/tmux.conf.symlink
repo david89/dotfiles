@@ -1,0 +1,36 @@
+# Use C-a instead of C-b.
+unbind C-b
+set -g prefix C-a
+bind a send-prefix
+
+# https://unix.stackexchange.com/questions/12032/create-new-window-with-current-directory-in-tmux
+bind - split-window -v -c "#{pane_current_path}"
+bind | split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
+# Allow us to reload our Tmux configuration while
+# using Tmux
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# TODO: Add instructions:
+#       * git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#       * tmux source ~/.tmux.conf
+#       * Press <prefix> + I to install the plugins.
+# tmux plugin configuration.
+set -g @plugin 'tmux-plugins/tpm'
+
+# Basic tmux settings.
+set -g @plugin 'tmux-plugins/tmux-sensible'
+# Save and restore tmux environment.
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+# Continuously save tmux sessions.
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-restore 'on'
+# Color schema.
+set -g @plugin 'seebi/tmux-colors-solarized'
+set -g @colors-solarized '256'
+# Sidebar.
+# set -g @plugin 'tmux-plugins/tmux-sidebar'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
