@@ -100,7 +100,7 @@ let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 "       * Run clang-format -style=llvm -dump-config > .clang-format and modify
 "         the defaults.
 " Normal mode.
-map <C-f> :pyf ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
+" map <C-f> :py3f ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
 " Insert mode.
 " imap <C-f> <c-o>:pyf ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
 
@@ -109,7 +109,7 @@ map <C-f> :pyf ~/homebrew/opt/llvm/share/clang/clang-format.py<cr>
 " Normal mode.
 " nnoremap <leader>clf :let g:clang_include_fixer_query_mode=0<cr>:pyf ~/homebrew/opt/llvm/share/clang/clang-include-fixer.py<cr>
 " Query word in the cursor.
-"nnoremap <leader>clq :let g:clang_include_fixer_query_mode=1<cr>:pyf ~/homebrew/opt/llvm/share/clang/clang-include-fixer.py<cr>
+nnoremap <leader>clq :let g:clang_include_fixer_query_mode=1<cr>:py3f ~/homebrew/opt/llvm/share/clang/clang-include-fixer.py<cr>
 " 
 " Clang rename.
-noremap <leader>cr :pyf ~/homebrew/opt/llvm/share/clang/clang-rename.py<cr>
+noremap <leader>cr :py3f ~/homebrew/opt/llvm/share/clang/clang-rename.py<cr>
